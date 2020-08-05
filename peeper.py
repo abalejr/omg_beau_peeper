@@ -23,7 +23,7 @@ for page in comic_pages:
     encoded_page_src = page_src.replace(" ", "%20")
     
     jpg_name = f"jpgs/page{page_num}.jpg"
-    # urlretrieve(encoded_page_src, jpg_name)
+    urlretrieve(encoded_page_src, jpg_name)
 
     jpg = Image.open(jpg_name)
     page_list.append(jpg)
