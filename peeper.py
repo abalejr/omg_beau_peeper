@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 from PIL import Image
 
 #Set variables for the base page of the comic
+#Change the url to the base url of the comic with no page number
 url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/001/"
 html = urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
