@@ -1,11 +1,10 @@
-import os
 from urllib.request import urlopen, urlretrieve
 from bs4 import BeautifulSoup
 from PIL import Image
 
 #Set variables for the base page of the comic
-#Change the url to the base url of the comic with no page number
-url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/001/"
+#Change the url to the base url of the comic with no page number, be sure to include a trailing /
+url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/003/"
 html = urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
 
