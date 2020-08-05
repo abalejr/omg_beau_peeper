@@ -9,6 +9,5 @@ url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/001/1/"
 html = urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
 
-all_imgs = soup.find_all('img')
-for img in all_imgs:
-    print(img.get('src'))
+page = soup.find_all('img', {"class": "picture"})[0]
+print(page.get('src'))
