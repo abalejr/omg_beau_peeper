@@ -6,18 +6,22 @@ from urllib.request import urlopen, urlretrieve
 from bs4 import BeautifulSoup
 from PIL import Image
 
-url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/001/1/"
+url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/001/"
 html = urlopen(url)
 soup = BeautifulSoup(html, 'lxml')
 
-page = soup.find_all('img', {"class": "picture"})[0]
-page_relative_src = page.get('src')
+comic_pager = soup.find('select', {"name": "page"})
+comic_pages = comic_pager.findChildren()
+comic_length = len(comic_pages)
+for page in comic_pages:
+    page_num = page.get('value')
+    page_url = url + page_num
+    page_html = urlopen(page_url)
+    page_soup = BeautifulSoup(page_html, 'lxml')
 
-page_src = "https://www.omgbeaupeep.com/comics/" + page_relative_src
-encoded_page_src = page_src.replace(" ", "%20")
-
-urlretrieve(encoded_page_src, "page1.jpg")
-
-image1 = Image.open( "page1.jpg" )
-im1 = image1.convert('RGB')
-im1.save("page1.pdf")
+    page_img = page_soup.find('img', {"class": "picture"})
+    page_relative_src = page_img.get('src')
+    page_src = "https://www.omgbeaupeep.com/comics/" + page_relative_src
+    encoded_page_src = page_src.replace(" ", "%20")
+    
+    urlretrieve(encoded_page_src, f"jpgs/page{page_num}.jpg")
