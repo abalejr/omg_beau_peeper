@@ -1,8 +1,10 @@
 from urllib.request import urlopen, urlretrieve
 from bs4 import BeautifulSoup
 from PIL import Image
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
 
-#Set variables for the base page of the comic
+#Set variables for the base url of the comic
 #Change the url to the base url of the comic with no page number, be sure to include a trailing /
 url = "https://www.omgbeaupeep.com/comics/Avatar_The_Last_Airbender/003/"
 html = urlopen(url)
